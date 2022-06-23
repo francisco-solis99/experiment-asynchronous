@@ -1,0 +1,17 @@
+{
+  "name": "curso-asincronismo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "callback": "node src/callback/index.js",
+    "challengueCallback": "node src/callback/challengue.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
+}
