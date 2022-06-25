@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "callback": "node src/callback/index.js",
     "challengueCallback": "node src/callback/challengue.js",
-    "promise": "node src/promises/index.js"
+    "promise": "node src/promises/index.js",
+    "challenguePromise": "node src/promises/challengue.js"
   },
   "keywords": [],
   "author": "",
