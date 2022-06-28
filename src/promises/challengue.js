@@ -22,7 +22,7 @@ fetchData(API_URL)
   .catch(err => console.log(err));
 
 
-// using directly fetch (browser API), use this code in the browser (or brint the module node-fetch)
+// using directly fetch (browser API), use this code in the browser (or bring the module node-fetch)
 fetch(API_URL)
     .then(response => response.json())
     .then(data => {

@@ -8,7 +8,9 @@
     "callback": "node src/callback/index.js",
     "challengueCallback": "node src/callback/challengue.js",
     "promise": "node src/promises/index.js",
-    "challenguePromise": "node src/promises/challengue.js"
+    "challenguePromise": "node src/promises/challengue.js",
+    "async": "node src/async_await/index.js",
+    "challengueAsync": "node src/async_await/challengue.js"
   },
   "keywords": [],
   "author": "",
