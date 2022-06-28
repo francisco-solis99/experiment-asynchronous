@@ -35,24 +35,43 @@ const generateRows = (nameCol, dataArray) => {
 }
 
 const API = 'https://swapi.dev/api/';
-// using fetch
-fetch(API)
-  .then(response => response.json())
-  .then(data => fetch(data.people))
-  .then(response => response.json())
-  .then(data => {
-    generateRows('characters', data.results)
-    const planetsUrls = data.results.map(item => item.homeworld);
-    const planets = Array(data.results.length).fill(null);
-    planetsUrls.forEach((url, index) => {
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          planets.splice(index, 1, data);
-          if(planets.every(planet => planet !== null)) generateRows('origin-planet', planets);
-        })
-        .catch(err => console.log(err));
-    });
-  })
-  .catch(err => console.log(err));
+// using fetch with no Promise.all and being repetitive
+// fetch(API)
+//   .then(response => response.json())
+//   .then(data => fetch(data.people))
+//   .then(response => response.json())
+//   .then(data => {
+//     generateRows('characters', data.results)
+//     const planetsUrls = data.results.map(item => item.homeworld);
+//     const planets = Array(data.results.length).fill(null);
+//     planetsUrls.forEach((url, index) => {
+//       fetch(url)
+//         .then(response => response.json())
+//         .then(data => {
+//           planets.splice(index, 1, data);
+//           if(planets.every(planet => planet !== null)) generateRows('origin-planet', planets);
+//         })
+//         .catch(err => console.log(err));
+//     });
+//   })
+//   .catch(err => console.log(err));
+
+
+  // a better way using promise.all and a loadJson function returninga  fetch(promise)
+  function loadJson(url){
+    return fetch(url)
+      .then(response => response.json())
+      .catch(err => console.log(new Error(err)))
+  }
+
+  loadJson(API)
+    .then(data => loadJson(data.people))
+    .then(data => {
+      generateRows('characters', data.results)
+      const planetsUrls = data.results.map(item => item.homeworld);
+      const planets = Promise.all(planetsUrls.map(url => fetch(url).then(data => data.json())))
+      planets.then(data => generateRows('origin-planet', data));
+    })
+    .catch(err => console.log(err));
+
 
